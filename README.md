@@ -62,4 +62,4 @@ AWS	AWS_ACCESS_KEY_ID、AWS_SECRET_ACCESS_KEY
 
 ![图片](https://github.com/user-attachments/assets/1a835dd1-445c-475c-8cdb-e81ac4e12629)
 
-[查看演示视频]([./videos/demo.mp4](https://github.com/xjzhi/xjzhi.github.io/blob/main/MPScan.mp4))
+[观看演示视频](https://raw.githubusercontent.com/xjzhi/MPScan/refs/heads/main/MPScan.mp4)
