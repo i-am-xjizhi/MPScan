@@ -1,5 +1,11 @@
 # MPScan：微信小程序安全审计一体化解决方案
-MPScan 是一款为安全研究人员与开发者设计的 Windows GUI 一体化工具，专用于对微信小程序进行自动化安全审计。基于对 wxapkg 反编译工具的深度二次开发与功能拓展，本工具实现了从 自动提取 → 反编译 → 敏感信息识别 → 风险可视化 → 报告输出 的完整工作流。
+> MPScan 是一款为安全研究人员与开发者设计的 Windows GUI 一体化工具，专用于对微信小程序进行自动化安全审计。基于对 wxapkg 反编译工具的深度二次开发与功能拓展，本工具实现了从 自动提取 → 反编译 → 敏感信息识别 → 风险可视化 → 报告输出 的完整工作流。
+
+
+[![GitHub issues](https://img.shields.io/github/issues/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/issues)
+[![GitHub stars](https://img.shields.io/github/stars/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/network)
+![图片](https://github.com/user-attachments/assets/24d19ca8-ab33-47e4-a41f-b25b2d3f5453)
 
 ## ✨ 工具亮点
 ```
@@ -34,17 +40,19 @@ MPScan 是一款为安全研究人员与开发者设计的 Windows GUI 一体化
 文件编码已兼容 Microsoft Excel，确保中文内容无乱码，便于存档、分享或进一步数据处理。
 ```
 ## 📁 覆盖的敏感信息类型
-```
-类别	识别示例
-微信生态	AppSecret、支付密钥（mch_key）、商户号（mch_id）
-腾讯云	SecretId、SecretKey、COS 存储桶配置、短信服务密钥
-阿里云	AccessKey ID、AccessKey Secret、OSS 配置
-AWS	AWS_ACCESS_KEY_ID、AWS_SECRET_ACCESS_KEY
-其他云服务	七牛云 AK/SK、华为云 AK/SK、百度云 AK/SK
-数据库	MongoDB 连接 URL、MySQL 连接字符串、Redis 连接地址与密码
-通用密钥令牌	API Key、JWT Token、Password、Bearer Token、私钥文件路径
-网络与内网信息	内网 IP 地址（10.x，172.16.x，192.168.x）、硬编码的未授权访问端点
-```
+w13scan测试了多个扫描平台，以下为扫描平台的测试报告
+
+| 类别 | 识别示例 |
+|------|----------|
+| 微信生态 | AppSecret、支付密钥（mch_key）、商户号（mch_id） |
+| 腾讯云 | SecretId、SecretKey、COS 存储桶配置、短信服务密钥 |
+| 阿里云 | AccessKey ID、AccessKey Secret、OSS 配置 |
+| AWS | AWS_ACCESS_KEY_ID、AWS_SECRET_ACCESS_KEY |
+| 其他云服务 | 七牛云 AK/SK、华为云 AK/SK、百度云 AK/SK |
+| 数据库 | MongoDB 连接 URL、MySQL 连接字符串、Redis 连接地址与密码 |
+| 通用密钥令牌 | API Key、JWT Token、Password、Bearer Token、私钥文件路径 |
+| 网络与内网信息 | 内网 IP 地址（10.x，172.16.x，192.168.x）、硬编码的未授权访问端点 |
+
 ## ⚙️ 运行环境与使用
 ```
 操作系统：Windows 10 / 11 （64位）
