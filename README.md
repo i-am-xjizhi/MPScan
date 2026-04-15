@@ -7,6 +7,8 @@
 [![GitHub forks](https://img.shields.io/github/forks/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/network)
 ![图片](https://github.com/user-attachments/assets/24d19ca8-ab33-47e4-a41f-b25b2d3f5453)
 
+---
+
 ## ✨ 工具亮点
 ```
 🚀 一键自动化 – 无需复杂配置，启动即用，覆盖监控、解包、扫描、分析完整流程。
@@ -15,6 +17,8 @@
 📦 开箱即用 – 纯原生 Windows 应用，无需安装 Python、Node.js 等任何外部依赖。
 💼 便捷的操作流 – 提供右键快速菜单（复制、打开、定位）、代码预览及一键报告导出，极大提升分析效率。
 ``` 
+
+---
 
 ## 🛠️ 核心功能
 ```
@@ -39,7 +43,11 @@
 支持将完整扫描结果导出为 CSV 格式报告。
 文件编码已兼容 Microsoft Excel，确保中文内容无乱码，便于存档、分享或进一步数据处理。
 ```
+
+---
+
 ## 📁 覆盖的敏感信息类型
+
 | 类别 | 识别示例 |
 |------|----------|
 | 微信生态 | AppSecret、支付密钥（mch_key）、商户号（mch_id） |
@@ -51,11 +59,17 @@
 | 通用密钥令牌 | API Key、JWT Token、Password、Bearer Token、私钥文件路径 |
 | 网络与内网信息 | 内网 IP 地址（10.x，172.16.x，192.168.x）、硬编码的未授权访问端点 |
 
+---
+
 ## ⚙️ 运行环境与使用
+
 ```
 操作系统：Windows 10 / 11 （64位）
 环境要求：无需安装任何依赖（如Python、Node.js、Java等）。下载可执行文件，解压后双击即可运行。
 ```
+
+---
+
 ## 🚀 快速开始
 ```
 下载发布版本：从 Releases 页面下载最新的 MPScan.zip。
@@ -69,3 +83,29 @@
 ![图片](https://github.com/user-attachments/assets/1a835dd1-445c-475c-8cdb-e81ac4e12629)
 
 [观看演示视频](https://raw.githubusercontent.com/xjzhi/MPScan/refs/heads/main/MPScan.mp4)
+  
+---
+
+## 📧 联系方式
+
+如有任何问题或建议，请通过以下方式联系：
+
+- **GitHub Issues**: [提交 Issue](https://github.com/xjzhi/MPScan/issues)
+
+---
+
+## ⭐ Star History
+
+![Star History Chart](https://api.star-history.com/svg?repos=xjzhi/MPScan&type=date)
+
+---
+
+## 🙏 致谢
+
+感谢所有为本项目做出贡献的开发者！
+
+---
+
+## ⚠️ 免责声明
+
+本工具仅供安全研究和授权测试使用。使用本工具进行未经授权的测试是违法的。使用者需自行承担使用本工具的一切后果，作者不承担任何法律责任。
