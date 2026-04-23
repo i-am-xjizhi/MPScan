@@ -84,8 +84,6 @@
 ![图片](https://github.com/user-attachments/assets/94b023e8-e3dc-4fab-b4a3-159d350bf673)
 
 ![图片](https://github.com/user-attachments/assets/e27af935-4283-4fa6-9a5d-d36afba89d1c)
-
-[观看演示视频](https://raw.githubusercontent.com/xjzhi/MPScan/refs/heads/main/MPScan.mp4)
   
 ---
 
