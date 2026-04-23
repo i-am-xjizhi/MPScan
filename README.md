@@ -5,7 +5,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/issues)
 [![GitHub stars](https://img.shields.io/github/stars/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/network)
-![图片](https://github.com/user-attachments/assets/24d19ca8-ab33-47e4-a41f-b25b2d3f5453)
+![图片](https://github.com/user-attachments/assets/94b023e8-e3dc-4fab-b4a3-159d350bf673)
+
 
 ---
 
@@ -80,7 +81,9 @@
 查看与导出结果：在界面中查看分级风险结果，点击条目查看代码上下文，可通过右键菜单或“导出”按钮生成报告。
 ```
 
-![图片](https://github.com/user-attachments/assets/1a835dd1-445c-475c-8cdb-e81ac4e12629)
+![图片](https://github.com/user-attachments/assets/94b023e8-e3dc-4fab-b4a3-159d350bf673)
+
+![图片](https://github.com/user-attachments/assets/e27af935-4283-4fa6-9a5d-d36afba89d1c)
 
 [观看演示视频](https://raw.githubusercontent.com/xjzhi/MPScan/refs/heads/main/MPScan.mp4)
   
@@ -101,6 +104,22 @@
 ## ⚠️ 免责声明
 
 本工具仅供安全研究和授权测试使用。使用本工具进行未经授权的测试是违法的。使用者需自行承担使用本工具的一切后果，作者不承担任何法律责任。
+
+---
+
+## 📋 更新日志
+
+| 版本 | 日期 | 说明 |
+|------|------|------|
+| **v2.0.0** | 20260423 | **主要更新** |
+| | | **修复** |
+| | | • **小程序名称识别错误**：修复部分小程序中文名称无法正确显示、显示为 wxid 或乱码的问题。优化名称解析逻辑，按优先级依次读取 `app-config.json` → `project.config.json` → `app.json`，与官方数据保持一致。 |
+| | | **新增** |
+| | | • **敏感信息利用工具集成**：界面右下角新增「利用工具: API-Explorer_v2.1.0」快捷入口。鼠标悬停显示安全提示，双击可直接启动同目录下的 `API.exe`；若工具未就位则弹窗提示下载地址。 |
+| **v1.0.0** | 初始版本 | **基础功能** |
+| | | • 支持微信小程序 .wxapkg 自动监控与反编译 |
+| | | • 敏感信息扫描：覆盖云密钥、数据库连接串、API Token、内网 IP 等 20+ 规则 |
+| | | • 结果可视化展示，支持代码上下文预览与 CSV 导出 |
 
 ---
 
