@@ -2,6 +2,7 @@ package gui
 
 import (
 	"bufio"
+	_ "embed"
 	"encoding/csv"
 	"fmt"
 	"os"
@@ -18,6 +19,9 @@ import (
 	"github.com/wux1an/wxapkg/core"
 	"github.com/wux1an/wxapkg/util"
 )
+
+//go:embed app.ico
+var appIcoBytes []byte
 
 const maxLogLines = 500
 
@@ -49,6 +53,12 @@ type AppWindow struct {
 
 	// 状态栏
 	statusLabel *walk.Label
+	toolWidget  *walk.CustomWidget // 右下角标签，宽度自适应文字
+	tagW        int                // 标签像素宽度，由 PaintPixels 动态测量后写入
+
+	// 浮动提示窗口
+	tipWin   *walk.MainWindow
+	tipShown int32 // atomic: 0=隐藏 1=显示
 
 	// 业务状态
 	watcher      *core.Watcher
@@ -56,8 +66,9 @@ type AppWindow struct {
 	cacheMu      sync.RWMutex
 
 	// 日志缓冲
-	logMu    sync.Mutex
-	logLines []string
+	logMu        sync.Mutex
+	logLines     []string
+	lastClickAt  time.Time // 利用工具标签双击检测
 }
 
 // Run 启动应用
@@ -81,12 +92,18 @@ func (a *AppWindow) buildAndRun() {
 		}
 		a.MainWindow.Synchronize(func() {
 			a.setupContextMenu()
+			// 从内嵌字节加载图标：写临时文件 → 加载 HICON → 立刻删除
+			if ico := loadEmbeddedIcon(); ico != nil {
+				_ = a.MainWindow.SetIcon(ico)
+				// 创建浮动提示窗口
+				a.createTipWindow()
+			}
 		})
 	}()
 
 	_, err := (MainWindow{
 		AssignTo: &a.MainWindow,
-		Title:    "MPScan小程序安全分析工具 v1.0",
+		Title:    "MPScan小程序安全分析工具 v2.0",
 		MinSize:  Size{Width: 1100, Height: 660},
 		Size:     Size{Width: 1300, Height: 780},
 		Font:     Font{Family: "Segoe UI", PointSize: 9},
@@ -128,7 +145,7 @@ func (a *AppWindow) buildAndRun() {
 						X: 0, Y: 0,
 						Width: updateBounds.Width - 16, Height: updateBounds.Height - 2,
 					}
-					_ = canvas.DrawTextPixels("v1.0  |  自动化反编译 + 敏感信息提取", verFont,
+					_ = canvas.DrawTextPixels("v2.0  |  自动化反编译 + 敏感信息提取", verFont,
 						walk.RGB(80, 160, 200), verRect,
 						walk.TextRight|walk.TextVCenter|walk.TextSingleLine)
 					return nil
@@ -292,22 +309,79 @@ func (a *AppWindow) buildAndRun() {
 				},
 			},
 
-			// ╔══ 状态栏 ════════════════════════════════════════╗
-			Composite{
-				Layout: HBox{
-					Margins: Margins{Left: 10, Top: 3, Right: 10, Bottom: 3},
-					Spacing: 0,
-				},
-				Children: []Widget{
-					Label{
-						AssignTo: &a.statusLabel,
-						Text:     "●  就绪 — 配置目录后点击「开始监控」或「立即扫描」",
-						Font:     Font{Family: "Segoe UI", PointSize: 9},
+				// ╔══ 状态栏 ════════════════════════════════════════╗
+				Composite{
+					Layout: HBox{
+						Margins:      Margins{Left: 6, Top: 2, Right: 0, Bottom: 2},
+						Spacing:      0,
+						MarginsZero:  false,
+					},
+					Children: []Widget{
+						// 左侧弹性空间（与右侧弹性空间配合，使状态文字真正居中）
+						HSpacer{},
+						// 中间状态文字
+						Label{
+							AssignTo: &a.statusLabel,
+							Text:     "●  就绪 — 配置目录后点击「开始监控」或「立即扫描」",
+							Font:     Font{Family: "Segoe UI", PointSize: 9},
+						},
+						// 右侧弹性空间
+						HSpacer{},
+						// 右下角利用工具标签（宽度由 PaintPixels 动态测量文字后自适应）
+						CustomWidget{
+							AssignTo:            &a.toolWidget,
+							MinSize:             Size{Width: 10, Height: 28},
+							MaxSize:             Size{Height: 28},
+							StretchFactor:       0,
+							InvalidatesOnResize: false,
+							PaintPixels: func(canvas *walk.Canvas, bounds walk.Rectangle) error {
+								tagText := "利用工具:API-Explorer_v2.1.0"
+								tagFont, _ := walk.NewFont("Segoe UI", 9, walk.FontBold)
+								defer tagFont.Dispose()
+								// 测量文字宽度，动态调整控件宽度
+								measured, _, _ := canvas.MeasureTextPixels(tagText, tagFont,
+									walk.Rectangle{Width: 180, Height: bounds.Height},
+									walk.TextSingleLine|walk.TextNoClip)
+								needW := measured.Width + 20
+								if a.tagW != needW {
+									a.tagW = needW
+									if a.toolWidget != nil {
+										a.toolWidget.SetMinMaxSize(
+											walk.Size{Width: needW, Height: 28},
+											walk.Size{Width: needW, Height: 28},
+										)
+									}
+								}
+								// 绘制蓝色背景
+								tagBg, _ := walk.NewSolidColorBrush(walk.RGB(0, 80, 160))
+								defer tagBg.Dispose()
+								_ = canvas.FillRectanglePixels(tagBg, bounds)
+								// 绘制白色文字
+								_ = canvas.DrawTextPixels(tagText, tagFont,
+									walk.RGB(255, 255, 255), bounds,
+									walk.TextCenter|walk.TextVCenter|walk.TextSingleLine)
+								return nil
+							},
+							OnMouseMove: func(x, y int, button walk.MouseButton) {
+								a.showTip()
+							},
+							OnMouseDown: func(x, y int, button walk.MouseButton) {
+								if button != walk.LeftButton {
+									return
+								}
+								now := time.Now()
+								if now.Sub(a.lastClickAt) < 500*time.Millisecond {
+									a.onToolDoubleClick()
+									a.lastClickAt = time.Time{}
+								} else {
+									a.lastClickAt = now
+								}
+							},
+						},
 					},
 				},
 			},
-		},
-	}.Run())
+		}.Run())
 
 	if err != nil {
 		walk.MsgBox(nil, "启动失败", err.Error(), walk.MsgBoxIconError)
@@ -719,7 +793,11 @@ func (a *AppWindow) appendLog(msg string) {
 }
 
 func (a *AppWindow) setStatus(text string) {
-	a.syncUI(func() { a.statusLabel.SetText(text) })
+	a.syncUI(func() {
+		if a.statusLabel != nil {
+			a.statusLabel.SetText(text)
+		}
+	})
 }
 
 func (a *AppWindow) syncUI(fn func()) {
@@ -750,4 +828,42 @@ func getDefaultWatchDir() string {
 		}
 	}
 	return getExeDir()
+}
+
+// onToolDoubleClick 双击"利用工具:API-Explorer_v2.1.0"标签时触发
+func (a *AppWindow) onToolDoubleClick() {
+	apiExe := filepath.Join(getExeDir(), "API-Explorer_v2.1.0.exe")
+	if _, err := os.Stat(apiExe); os.IsNotExist(err) {
+		walk.MsgBox(a.MainWindow,
+			"未找到工具",
+			"未检测到 API-Explorer_v2.1.0.exe，请前往 https://github.com/mrknow001/API-Explorer 下载 .exe文件 后放置到当前目录下。",
+			walk.MsgBoxIconWarning)
+		return
+	}
+	go func() {
+		_ = exec.Command(apiExe).Start()
+	}()
+}
+
+// loadEmbeddedIcon 将内嵌的 app.ico 字节写入临时文件，
+// 加载为 walk.Icon 后立刻删除临时文件（HICON 已驻留内存）。
+func loadEmbeddedIcon() *walk.Icon {
+	tmp, err := os.CreateTemp("", "mpscan-*.ico")
+	if err != nil {
+		return nil
+	}
+	tmpPath := tmp.Name()
+	defer os.Remove(tmpPath)
+
+	if _, err = tmp.Write(appIcoBytes); err != nil {
+		tmp.Close()
+		return nil
+	}
+	tmp.Close()
+
+	ico, err := walk.NewIconFromFile(tmpPath)
+	if err != nil {
+		return nil
+	}
+	return ico
 }

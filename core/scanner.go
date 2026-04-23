@@ -276,16 +276,63 @@ func scanFile(path, wxid, appName string, seen map[string]bool) []*ScanResult {
 }
 
 // ResolveNameFromDecompiledDir 从反编译输出目录中读取真实小程序名称。
-// 优先读取 project.config.json → "projectname"；
-// 回退读取 app.json → "window" → "navigationBarTitleText"。
+// 优先读取 app-config.json → global.window / window → navigationBarTitleText；
+// 再读 project.config.json → "projectname"；
+// 最后回退读取 app.json → "window" → "navigationBarTitleText"。
 func ResolveNameFromDecompiledDir(decompiledDir string) string {
-	// 策略1: project.config.json
+	// 策略1: app-config.json（与 Python 脚本逻辑一致，优先级最高）
+	if name := readAppConfigJsonTitle(decompiledDir); name != "" {
+		return name
+	}
+	// 策略2: project.config.json
 	if name := readProjectConfigName(decompiledDir); name != "" {
 		return name
 	}
-	// 策略2: app.json window.navigationBarTitleText
+	// 策略3: app.json window.navigationBarTitleText
 	if name := readAppJsonTitle(decompiledDir); name != "" {
 		return name
+	}
+	return ""
+}
+
+// readAppConfigJsonTitle 查找 app-config.json，读取 global.window.navigationBarTitleText
+// 或 window.navigationBarTitleText（与 Python 版 find_miniapp_names.py 逻辑一致）。
+func readAppConfigJsonTitle(root string) string {
+	var candidates []string
+	// 递归 Walk 查找所有 app-config.json
+	_ = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		if err == nil && !info.IsDir() && info.Name() == "app-config.json" {
+			candidates = append(candidates, path)
+		}
+		return nil
+	})
+	for _, p := range candidates {
+		data, err := os.ReadFile(p)
+		if err != nil {
+			continue
+		}
+		var obj map[string]interface{}
+		if err := json.Unmarshal(data, &obj); err != nil {
+			continue
+		}
+		// 优先：global.window.navigationBarTitleText
+		if globalObj, ok := obj["global"].(map[string]interface{}); ok {
+			if winObj, ok := globalObj["window"].(map[string]interface{}); ok {
+				if v, ok := winObj["navigationBarTitleText"]; ok {
+					if s, ok := v.(string); ok && strings.TrimSpace(s) != "" {
+						return strings.TrimSpace(s)
+					}
+				}
+			}
+		}
+		// 回退：window.navigationBarTitleText
+		if winObj, ok := obj["window"].(map[string]interface{}); ok {
+			if v, ok := winObj["navigationBarTitleText"]; ok {
+				if s, ok := v.(string); ok && strings.TrimSpace(s) != "" {
+					return strings.TrimSpace(s)
+				}
+			}
+		}
 	}
 	return ""
 }
