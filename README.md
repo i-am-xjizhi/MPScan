@@ -2,9 +2,9 @@
 > MPScan 是一款为安全研究人员与开发者设计的 Windows GUI 一体化工具，专用于对微信小程序进行自动化安全审计。基于对 wxapkg 反编译工具的深度二次开发与功能拓展，本工具实现了从 自动提取 → 反编译 → 敏感信息识别 → 风险可视化 → 报告输出 的完整工作流。
 
 
-[![GitHub issues](https://img.shields.io/github/issues/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/issues)
-[![GitHub stars](https://img.shields.io/github/stars/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/xjzhi/MPScan)](https://github.com/xjzhi/MPScan/network)
+[![GitHub issues](https://img.shields.io/github/issues/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/issues)
+[![GitHub stars](https://img.shields.io/github/stars/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/network)
 ![图片](https://github.com/user-attachments/assets/94b023e8-e3dc-4fab-b4a3-159d350bf673)
 
 
@@ -89,7 +89,7 @@
 
 ## ⭐ Star History
 
-![Star History Chart](https://api.star-history.com/svg?repos=xjzhi/MPScan&type=date&v=3)
+![Star History Chart](https://api.star-history.com/svg?repos=i-am-xjizhi/MPScan&type=date&v=3)
 
 ---
 
@@ -137,4 +137,4 @@
 
 ### 📧 联系方式
 如有任何问题或建议，也可以通过以下方式联系：
-- **GitHub Issues**: [提交 Issue](https://github.com/xjzhi/MPScan/issues)
+- **GitHub Issues**: [提交 Issue](https://github.com/i-am-xjizhi/MPScan/issues)
