@@ -5,6 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/issues)
 [![GitHub stars](https://img.shields.io/github/stars/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/network)
+[![GitHub watchers](https://img.shields.io/github/watchers/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/watchers)
 ![图片](https://github.com/user-attachments/assets/94b023e8-e3dc-4fab-b4a3-159d350bf673)
 
 
