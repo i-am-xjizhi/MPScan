@@ -1,11 +1,44 @@
-# MPScan：微信小程序安全审计一体化解决方案
+<div align="center">
+  <h1>MPScan</h1>
+
+  <img width="128" height="128" alt="Yee Music" src="https://avatars.githubusercontent.com/u/109730978">
+</div>
+
+<div align="center">
+  <p>MPScan 实现了从 自动提取 → 反编译 → 敏感信息识别 → 风险可视化 → 报告输出 的完整工作流</p>
+  <p><strong>微信小程序安全审计一体化解决方案</strong></p>
+</div>
+
+<div align="center">
+  <a href="https://github.com/i-am-xjizhi/MPScan/stargazers">
+    <img src="https://img.shields.io/github/stars/i-am-xjizhi/MPScan" alt="GitHub Stars">
+  </a>
+  <a href="https://github.com/i-am-xjizhi/MPScan/network">
+    <img src="https://img.shields.io/github/forks/i-am-xjizhi/MPScan" alt="GitHub Forks">
+  </a>
+  <a href="https://github.com/i-am-xjizhi/MPScan/watchers">
+    <img src="https://img.shields.io/github/watchers/i-am-xjizhi/MPScan" alt="GitHub Watchers">
+  </a>
+  </b>
+</div>
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Version-2.0-brightgreen" alt="Version: 2.0">
+  <a href="https://github.com/i-am-xjizhi/MPScan/issues">
+    <img src="https://img.shields.io/github/issues/i-am-xjizhi/MPScan" alt="GitHub Issues">
+  </a>
+  <img src="https://img.shields.io/badge/OS-Windows_10/11-0078D6" alt="OS: Windows 10/11">
+  <img src="https://img.shields.io/badge/Arch-x64-red" alt="Arch: x64">
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+  </a>
+</div>
+
+
+
+## 🖼️ 界面展示
 > MPScan 是一款为安全研究人员与开发者设计的 Windows GUI 一体化工具，专用于对微信小程序进行自动化安全审计。基于对 wxapkg 反编译工具的深度二次开发与功能拓展，本工具实现了从 自动提取 → 反编译 → 敏感信息识别 → 风险可视化 → 报告输出 的完整工作流。
 
-
-[![GitHub issues](https://img.shields.io/github/issues/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/issues)
-[![GitHub stars](https://img.shields.io/github/stars/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/network)
-[![GitHub watchers](https://img.shields.io/github/watchers/i-am-xjizhi/MPScan)](https://github.com/i-am-xjizhi/MPScan/watchers)
 ![图片](https://github.com/user-attachments/assets/94b023e8-e3dc-4fab-b4a3-159d350bf673)
 
 
