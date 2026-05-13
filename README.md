@@ -23,17 +23,18 @@
 </div>
 
 <div align="center">
+  <a href="https://github.com/i-am-xjizhi/MPScan/releases">
+    <img src="https://img.shields.io/github/downloads/i-am-xjizhi/MPScan/total?labelColor=black&color=red&label=Downloads" alt="Downloads">
+  </a>
   <img src="https://img.shields.io/badge/Version-2.0-brightgreen" alt="Version: 2.0">
   <a href="https://github.com/i-am-xjizhi/MPScan/issues">
     <img src="https://img.shields.io/github/issues/i-am-xjizhi/MPScan" alt="GitHub Issues">
   </a>
   <img src="https://img.shields.io/badge/OS-Windows_10/11-0078D6" alt="OS: Windows 10/11">
-  <img src="https://img.shields.io/badge/Arch-x64-red" alt="Arch: x64">
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
   </a>
 </div>
-
 
 
 ## 🖼️ 界面展示
