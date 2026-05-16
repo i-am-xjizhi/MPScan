@@ -26,7 +26,7 @@
   <a href="https://img.shields.io/github/downloads/i-am-xjizhi/MPScan/total">
     <img src="https://img.shields.io/github/downloads/i-am-xjizhi/MPScan/total?labelColor=black&color=red&label=Downloads" alt="Downloads">
   </a>
-  <img src="https://img.shields.io/badge/Version-2.0-blue" alt="Version: 2.0">
+  <img src="https://img.shields.io/badge/Version-2.0-blue?labelColor=black" alt="Version: 2.0">
   <a href="https://github.com/i-am-xjizhi/MPScan/issues">
     <img src="https://img.shields.io/github/issues/i-am-xjizhi/MPScan?labelColor=black&color=green" alt="GitHub Issues">
   </a>
