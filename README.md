@@ -23,7 +23,7 @@
 </div>
 
 <div align="center">
-  <a href="https://img.shields.io/github/downloads/i-am-xjizhi/MPScan/total">
+  <a href="https://api.github.com/repos/i-am-xjizhi/MPScan/releases">
     <img src="https://img.shields.io/github/downloads/i-am-xjizhi/MPScan/total?labelColor=black&color=red&label=Downloads" alt="Downloads">
   </a>
   <img src="https://img.shields.io/badge/Version-2.0-blue?labelColor=black" alt="Version: 2.0">
