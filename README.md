@@ -31,7 +31,7 @@
     <img src="https://img.shields.io/github/issues/i-am-xjizhi/MPScan?labelColor=black&color=green" alt="GitHub Issues">
   </a>
   <img src="https://img.shields.io/badge/OS-Windows_10/11-0078D6?labelColor=black&color=blue" alt="OS: Windows 10/11">
-  <a href="https://opensource.org/licenses/MIT">
+  <a href="https://github.com/i-am-xjizhi/MPScan/tree/main?tab=MIT-1-ov-file">
     <img src="https://img.shields.io/badge/License-MIT-green.svg?labelColor=black" alt="License: MIT">
   </a>
 </div>
